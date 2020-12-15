@@ -11,17 +11,13 @@ using UploadImage.Data;
 using UploadImage.Models;
 using UploadImage.Models.Response;
 using UploadImage.Services.Contracts;
+using UploadImage.Infrasructures;
 
 namespace UploadImage.Services
 {
     public class ImagesService : IImagesService
     {
         private readonly ImageDbContext db;
-
-        private const string ApiKey = "AIzaSyAUT7-9jozXUERlLpAiDDn1cgY_Zk5gY5k";
-        private const string Bucket = "image-1e733.appspot.com";
-        private const string AuthEmail = "bblagoev998@gmail.com";
-        private const string AuthPassword = "Borislav123";
 
         public ImagesService(ImageDbContext db)
         {
@@ -70,11 +66,11 @@ namespace UploadImage.Services
                 using var stream = File.Open(filePath, FileMode.Open);
 
                 // of course you can login using other method, not just email+password
-                var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
-                var a = await auth.SignInWithEmailAndPasswordAsync(AuthEmail, AuthPassword);
+                var auth = new FirebaseAuthProvider(new FirebaseConfig(WebConst.ApiKey));
+                var a = await auth.SignInWithEmailAndPasswordAsync(WebConst.AuthEmail, WebConst.AuthPassword);
 
                 var task = new FirebaseStorage(
-                    Bucket,
+                    WebConst.Bucket,
                     new FirebaseStorageOptions
                     {
                         AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
