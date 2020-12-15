@@ -1,0 +1,16 @@
+﻿@model IEnumerable<UploadImage.Models.Response.GetAllImagesResponseModel>
+
+<div class="row">
+    @foreach (var image in Model)
+    {
+        <div class="col-lg-3">
+            <div class="card" style="width: 18rem;">
+                <img src="@image.ImageUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <a asp-action="Details" asp-route-id="@image.ImageId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@image.ImageId">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
