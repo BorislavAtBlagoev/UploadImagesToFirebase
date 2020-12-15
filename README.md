@@ -1,0 +1,1 @@
+# This is my app for uploading images to firebase. In the future I'll extend my app with new functionality and do refactoring. Also I'll handle the exceptions. For now is just to practice my web skills. 
